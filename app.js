@@ -9,6 +9,7 @@ const SOUNDS = [
   { id: "gay-luigi", label: "Gay Luigi?", cat: "cdi", file: "gay-luigi.mp3" },
   { id: "hotel-mario-door", label: "Door Close (Hotel Mario)", cat: "cdi", file: "hotel-mario-door.mp3" },
   { id: "bowser-laugh", label: "Bowser Laugh", cat: "mario", file: "bowser-laugh.mp3" },
+  { id: "dear-pesky-plumbers", label: "Dear Pesky Plumbers", cat: "cdi", file: "bowser-clip.mp3" },
   { id: "its-a-football", label: "It's a Football!", cat: "mario", file: "its-a-football.mp3" },
   { id: "all-toasters", label: "All Toasters Toast Toast", cat: "mario", file: "all-toasters-toast-toast.mp3" },
   { id: "too-many-toasters", label: "Too Many Toasters", cat: "mario", file: "too-many-toasters.mp3" },
@@ -50,6 +51,7 @@ const SOUNDS = [
   { id: "where-the-poop-is", label: "YouTube Is Where the Poop Is", cat: "meme", file: "where-the-poop-is.mp3" },
   { id: "numa-numa", label: "Numa Numa Yay", cat: "meme", file: "numa-numa.mp3" },
   { id: "talking-about-the-penis", label: "We're Gonna Be Talking About the Penis", cat: "meme", file: "talking-about-the-penis.mp3" },
+  { id: "philips-cd-earrape", label: "Philips CD Intro Earrape", cat: "meme", file: "philips-cd-earrape.mp3" },
   { id: "dramatic-chipmunk", label: "Dramatic Chipmunk", cat: "meme", file: "dramatic-chipmunk.mp3" },
 
   // Misc / Sound Effects

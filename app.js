@@ -55,13 +55,12 @@ const SOUNDS = [
   { id: "dramatic-chipmunk", label: "Dramatic Chipmunk", cat: "meme", file: "dramatic-chipmunk.mp3" },
 
   // Misc / Sound Effects
-  { id: "ear-rape", label: "Ear Rape Bass Boost", cat: "misc", file: "ear-rape.mp3" },
+  { id: "ear-rape", label: "Rick Roll", cat: "misc", file: "ear-rape.mp3" },
   { id: "windows-xp", label: "Windows XP Error", cat: "misc", file: "windows-xp-error.mp3" },
   { id: "mlg-horn", label: "MLG Airhorn", cat: "misc", file: "mlg-airhorn.mp3" },
   { id: "sad-violin", label: "Sad Violin", cat: "misc", file: "sad-violin.mp3" },
   { id: "bruh", label: "Bruh Sound Effect", cat: "misc", file: "bruh.mp3" },
   { id: "oof", label: "Roblox OOF", cat: "misc", file: "oof.mp3" },
-  { id: "taco-bell", label: "Taco Bell Bong", cat: "misc", file: "taco-bell.mp3" },
 ];
 
 const board = document.getElementById("board");

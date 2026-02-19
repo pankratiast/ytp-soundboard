@@ -79,6 +79,23 @@ preGain.connect(waveshaper);
 waveshaper.connect(masterGain);
 masterGain.connect(audioCtx.destination);
 
+// Unlock audio on mobile - must happen on first user touch/click
+let audioUnlocked = false;
+function unlockAudio() {
+  if (audioUnlocked) return;
+  audioCtx.resume().then(() => {
+    // Play a silent buffer to fully unlock on iOS
+    const silentBuf = audioCtx.createBuffer(1, 1, 22050);
+    const src = audioCtx.createBufferSource();
+    src.buffer = silentBuf;
+    src.connect(audioCtx.destination);
+    src.start(0);
+    audioUnlocked = true;
+  });
+}
+document.addEventListener("touchstart", unlockAudio, { once: true });
+document.addEventListener("click", unlockAudio, { once: true });
+
 function makeDistortionCurve(amount) {
   const samples = 44100;
   const curve = new Float32Array(samples);
@@ -126,7 +143,9 @@ function loadBuffer(file) {
 }
 
 function playSound(file, btn) {
-  if (audioCtx.state === "suspended") audioCtx.resume();
+  if (audioCtx.state === "suspended") {
+    audioCtx.resume();
+  }
   btn.classList.add("playing");
 
   loadBuffer(file)

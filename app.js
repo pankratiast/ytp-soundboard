@@ -128,58 +128,45 @@ function getVolume() {
   return parseFloat(volumeSlider.value);
 }
 
-// Audio buffer cache so we don't re-fetch every click
-const bufferCache = {};
-
-function loadBuffer(file) {
-  if (bufferCache[file]) return Promise.resolve(bufferCache[file]);
-  return fetch(`sounds/${file}`)
-    .then((r) => r.arrayBuffer())
-    .then((data) => audioCtx.decodeAudioData(data))
-    .then((buffer) => {
-      bufferCache[file] = buffer;
-      return buffer;
-    });
-}
+const activeAudios = new Set();
 
 function playSound(file, btn) {
-  if (audioCtx.state === "suspended") {
-    audioCtx.resume();
-  }
+  if (audioCtx.state === "suspended") audioCtx.resume();
+
+  const audio = new Audio(`sounds/${file}`);
+  audio.volume = getVolume();
+  activeAudios.add(audio);
   btn.classList.add("playing");
 
-  loadBuffer(file)
-    .then((buffer) => {
-      const source = audioCtx.createBufferSource();
-      source.buffer = buffer;
+  // Route through Web Audio for earrape distortion
+  try {
+    const source = audioCtx.createMediaElementSource(audio);
+    source.connect(preGain);
+  } catch (e) {
+    // Fallback: if Web Audio routing fails, audio still plays normally
+  }
 
-      const gainNode = audioCtx.createGain();
-      gainNode.gain.value = getVolume();
+  audio.addEventListener("ended", () => {
+    activeAudios.delete(audio);
+    btn.classList.remove("playing");
+  });
+  audio.addEventListener("error", () => {
+    activeAudios.delete(audio);
+    btn.classList.remove("playing");
+  });
 
-      source.connect(gainNode);
-      gainNode.connect(preGain);
-
-      activeSources.add(source);
-      source.onended = () => {
-        activeSources.delete(source);
-        btn.classList.remove("playing");
-        source.disconnect();
-        gainNode.disconnect();
-      };
-
-      source.start(0);
-    })
-    .catch(() => {
-      btn.classList.remove("playing");
-    });
+  audio.play().catch(() => {
+    btn.classList.remove("playing");
+    activeAudios.delete(audio);
+  });
 }
 
 function stopAll() {
-  activeSources.forEach((source) => {
-    try { source.stop(); } catch (e) {}
-    source.disconnect();
+  activeAudios.forEach((audio) => {
+    audio.pause();
+    audio.currentTime = 0;
   });
-  activeSources.clear();
+  activeAudios.clear();
   document.querySelectorAll(".sound-btn.playing").forEach((btn) => {
     btn.classList.remove("playing");
   });

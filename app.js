@@ -66,41 +66,102 @@ const SOUNDS = [
 
 const board = document.getElementById("board");
 const volumeSlider = document.getElementById("volume");
+const earrapeSlider = document.getElementById("earrape");
 const stopAllBtn = document.getElementById("stop-all");
 
-const activeAudios = new Set();
+const activeSources = new Set();
+
+// Web Audio API for real clipping distortion
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const waveshaper = audioCtx.createWaveShaper();
+const masterGain = audioCtx.createGain();
+const preGain = audioCtx.createGain();
+preGain.connect(waveshaper);
+waveshaper.connect(masterGain);
+masterGain.connect(audioCtx.destination);
+
+function makeDistortionCurve(amount) {
+  const samples = 44100;
+  const curve = new Float32Array(samples);
+  for (let i = 0; i < samples; i++) {
+    const x = (i * 2) / samples - 1;
+    // Hard clipping curve
+    curve[i] = Math.max(-1, Math.min(1, x * amount));
+  }
+  return curve;
+}
+
+function updateEarrape() {
+  const val = parseFloat(earrapeSlider.value);
+  if (val === 0) {
+    waveshaper.curve = null;
+    preGain.gain.value = 1;
+    masterGain.gain.value = 1;
+  } else {
+    // Drive the signal way too hot into a hard clipper
+    preGain.gain.value = 1 + val * 50;
+    waveshaper.curve = makeDistortionCurve(1 + val * 20);
+    masterGain.gain.value = 1 + val * 3;
+  }
+}
+
+earrapeSlider.addEventListener("input", updateEarrape);
+updateEarrape();
 
 function getVolume() {
   return parseFloat(volumeSlider.value);
 }
 
+// Audio buffer cache so we don't re-fetch every click
+const bufferCache = {};
+
+function loadBuffer(file) {
+  if (bufferCache[file]) return Promise.resolve(bufferCache[file]);
+  return fetch(`sounds/${file}`)
+    .then((r) => r.arrayBuffer())
+    .then((data) => audioCtx.decodeAudioData(data))
+    .then((buffer) => {
+      bufferCache[file] = buffer;
+      return buffer;
+    });
+}
+
 function playSound(file, btn) {
-  const audio = new Audio(`sounds/${file}`);
-  audio.volume = getVolume();
-  activeAudios.add(audio);
-
+  if (audioCtx.state === "suspended") audioCtx.resume();
   btn.classList.add("playing");
-  audio.addEventListener("ended", () => {
-    activeAudios.delete(audio);
-    btn.classList.remove("playing");
-  });
-  audio.addEventListener("error", () => {
-    activeAudios.delete(audio);
-    btn.classList.remove("playing");
-  });
 
-  audio.play().catch(() => {
-    btn.classList.remove("playing");
-    activeAudios.delete(audio);
-  });
+  loadBuffer(file)
+    .then((buffer) => {
+      const source = audioCtx.createBufferSource();
+      source.buffer = buffer;
+
+      const gainNode = audioCtx.createGain();
+      gainNode.gain.value = getVolume();
+
+      source.connect(gainNode);
+      gainNode.connect(preGain);
+
+      activeSources.add(source);
+      source.onended = () => {
+        activeSources.delete(source);
+        btn.classList.remove("playing");
+        source.disconnect();
+        gainNode.disconnect();
+      };
+
+      source.start(0);
+    })
+    .catch(() => {
+      btn.classList.remove("playing");
+    });
 }
 
 function stopAll() {
-  activeAudios.forEach((audio) => {
-    audio.pause();
-    audio.currentTime = 0;
+  activeSources.forEach((source) => {
+    try { source.stop(); } catch (e) {}
+    source.disconnect();
   });
-  activeAudios.clear();
+  activeSources.clear();
   document.querySelectorAll(".sound-btn.playing").forEach((btn) => {
     btn.classList.remove("playing");
   });

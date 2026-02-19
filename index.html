@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YTP Soundboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>YTP SOUNDBOARD</h1>
+  <p class="subtitle">click a button. embrace the poop.</p>
+
+  <div class="controls">
+    <label>
+      Volume
+      <input type="range" id="volume" min="0" max="1" step="0.05" value="0.8">
+    </label>
+    <button id="stop-all" class="stop-btn">STOP ALL</button>
+  </div>
+
+  <div class="board" id="board"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

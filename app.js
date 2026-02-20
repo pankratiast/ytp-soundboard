@@ -7,7 +7,6 @@ const SOUNDS = [
   { id: "nice-of-the-princess", label: "Nice of the Princess to Invite Us", cat: "cdi", file: "nice-of-the-princess.mp3" },
   { id: "no", label: "NO.", cat: "cdi", file: "no.mp3" },
   { id: "gay-luigi", label: "Gay Luigi?", cat: "cdi", file: "gay-luigi.mp3" },
-  { id: "hotel-mario-door", label: "Door Close (Hotel Mario)", cat: "cdi", file: "hotel-mario-door.mp3" },
   { id: "bowser-laugh", label: "Bowser Laugh", cat: "mario", file: "bowser-laugh.mp3" },
   { id: "dear-pesky-plumbers", label: "Dear Pesky Plumbers", cat: "cdi", file: "bowser-clip.mp3" },
   { id: "its-a-football", label: "It's a Football!", cat: "mario", file: "its-a-football.mp3" },
@@ -26,7 +25,7 @@ const SOUNDS = [
   { id: "it-burns", label: "IT BURNS!", cat: "zelda", file: "it-burns.mp3" },
   { id: "cant-give-credit", label: "Sorry Link, I Can't Give Credit", cat: "zelda", file: "cant-give-credit.mp3" },
   { id: "sure-is-boring", label: "Gee, It Sure Is Boring Around Here", cat: "zelda", file: "sure-is-boring.mp3" },
-  { id: "only-link", label: "Only Link Can Defeat Ganon", cat: "zelda", file: "only-link.mp3" },
+  { id: "only-link", label: "It Is Written", cat: "zelda", file: "only-link.mp3" },
   { id: "king-laugh", label: "King Harkinian Laugh", cat: "zelda", file: "king-laugh.mp3" },
   { id: "balls-inert", label: "The Balls Are Inert (DBZ)", cat: "meme", file: "balls-are-inert.mp3" },
   { id: "wtf-boom", label: "WTF BOOM", cat: "meme", file: "wtf-boom.mp3" },
@@ -42,6 +41,7 @@ const SOUNDS = [
   { id: "oh-my-god", label: "OH MY GOD (JoJo)", cat: "meme", file: "oh-my-god.mp3" },
   { id: "za-warudo", label: "ZA WARUDO! (JoJo)", cat: "meme", file: "za-warudo.mp3" },
   { id: "shiza", label: "SHIZAAA! (JoJo)", cat: "meme", file: "shiza.mp3" },
+  { id: "yare-yare-daze", label: "Yare Yare Daze (JoJo)", cat: "meme", file: "yare-yare-daze.mp3" },
   { id: "lololol", label: "LOLOLOLOLOL (Arby n Chief)", cat: "meme", file: "lololol.mp3" },
   { id: "wipe-my-ass", label: "I Wipe My Ass With $10 (Arby n Chief)", cat: "meme", file: "wipe-my-ass.mp3" },
   { id: "arby-laugh", label: "Arby Laugh (Arby n Chief)", cat: "meme", file: "arby-laugh.mp3" },
@@ -131,19 +131,19 @@ function getVolume() {
 const activeAudios = new Set();
 
 function playSound(file, btn) {
-  if (audioCtx.state === "suspended") audioCtx.resume();
-
+  const earrapeVal = parseFloat(earrapeSlider.value);
   const audio = new Audio(`sounds/${file}`);
   audio.volume = getVolume();
   activeAudios.add(audio);
   btn.classList.add("playing");
 
-  // Route through Web Audio for earrape distortion
-  try {
-    const source = audioCtx.createMediaElementSource(audio);
-    source.connect(preGain);
-  } catch (e) {
-    // Fallback: if Web Audio routing fails, audio still plays normally
+  // Only route through Web Audio when earrape is on
+  if (earrapeVal > 0) {
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    try {
+      const source = audioCtx.createMediaElementSource(audio);
+      source.connect(preGain);
+    } catch (e) {}
   }
 
   audio.addEventListener("ended", () => {

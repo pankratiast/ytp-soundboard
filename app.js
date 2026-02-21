@@ -66,6 +66,8 @@ const SOUNDS = [
   { id: "mc-death-9", label: "Master Chief Death Noise 9", cat: "halo", file: "mc-death-9.mp3" },
   { id: "mc-death-10", label: "Master Chief Death Noise 10", cat: "halo", file: "mc-death-10.mp3" },
 
+  { id: "elite-wort", label: "Wort Wort Wort!", cat: "halo", file: "elite-wort.mp3" },
+
   // Halo 2
   { id: "mc2-death-1", label: "Master Chief Death Noise 1", cat: "halo2", file: "mc2-death-1.mp3" },
   { id: "mc2-death-2", label: "Master Chief Death Noise 2", cat: "halo2", file: "mc2-death-2.mp3" },
@@ -106,6 +108,31 @@ const SOUNDS = [
   { id: "mc2-death-37", label: "Master Chief Death Noise 37", cat: "halo2", file: "mc2-death-37.mp3" },
   { id: "mc2-death-38", label: "Master Chief Death Noise 38", cat: "halo2", file: "mc2-death-38.mp3" },
   { id: "mc2-death-39", label: "Master Chief Death Noise 39", cat: "halo2", file: "mc2-death-39.mp3" },
+
+  // Halo 3
+  { id: "arby3-death-1", label: "Arbiter Death Noise 1", cat: "halo3", file: "arby-death-1.mp3" },
+  { id: "arby3-death-2", label: "Arbiter Death Noise 2", cat: "halo3", file: "arby-death-2.mp3" },
+  { id: "arby3-death-3", label: "Arbiter Death Noise 3", cat: "halo3", file: "arby-death-3.mp3" },
+  { id: "arby3-death-4", label: "Arbiter Death Noise 4", cat: "halo3", file: "arby-death-4.mp3" },
+  { id: "arby3-death-5", label: "Arbiter Death Noise 5", cat: "halo3", file: "arby-death-5.mp3" },
+  { id: "elite3-death-1", label: "Elite Death Noise 1", cat: "halo3", file: "elite-death-1.mp3" },
+  { id: "elite3-death-2", label: "Elite Death Noise 2", cat: "halo3", file: "elite-death-2.mp3" },
+  { id: "elite3-death-3", label: "Elite Death Noise 3", cat: "halo3", file: "elite-death-3.mp3" },
+  { id: "elite3-death-4", label: "Elite Death Noise 4", cat: "halo3", file: "elite-death-4.mp3" },
+  { id: "elite3-death-5", label: "Elite Death Noise 5", cat: "halo3", file: "elite-death-5.mp3" },
+  { id: "elite3-death-6", label: "Elite Death Noise 6", cat: "halo3", file: "elite-death-6.mp3" },
+  { id: "elite3-death-7", label: "Elite Death Noise 7", cat: "halo3", file: "elite-death-7.mp3" },
+  { id: "elite3-death-8", label: "Elite Death Noise 8", cat: "halo3", file: "elite-death-8.mp3" },
+  { id: "elite3-death-9", label: "Elite Death Noise 9", cat: "halo3", file: "elite-death-9.mp3" },
+  { id: "elite3-death-10", label: "Elite Death Noise 10", cat: "halo3", file: "elite-death-10.mp3" },
+  { id: "elite3-death-11", label: "Elite Death Noise 11", cat: "halo3", file: "elite-death-11.mp3" },
+  { id: "johnson3-death-1", label: "Sgt. Johnson Death Noise 1", cat: "halo3", file: "johnson-death-1.mp3" },
+  { id: "johnson3-death-2", label: "Sgt. Johnson Death Noise 2", cat: "halo3", file: "johnson-death-2.mp3" },
+  { id: "johnson3-death-3", label: "Sgt. Johnson Death Noise 3", cat: "halo3", file: "johnson-death-3.mp3" },
+  { id: "johnson3-death-4", label: "Sgt. Johnson Death Noise 4", cat: "halo3", file: "johnson-death-4.mp3" },
+  { id: "johnson3-death-5", label: "Sgt. Johnson Death Noise 5", cat: "halo3", file: "johnson-death-5.mp3" },
+  { id: "johnson3-death-6", label: "Sgt. Johnson Death Noise 6", cat: "halo3", file: "johnson-death-6.mp3" },
+  { id: "johnson3-death-7", label: "Sgt. Johnson Death Noise 7", cat: "halo3", file: "johnson-death-7.mp3" },
 
   // Misc / Sound Effects
   { id: "ear-rape", label: "Rick Roll", cat: "misc", file: "ear-rape.mp3" },

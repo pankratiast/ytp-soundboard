@@ -62,6 +62,14 @@ const SOUNDS = [
   { id: "arby-laugh", label: "Master Chief Laugh (Arby n Chief)", cat: "meme", file: "arby-laugh.mp3" },
   { id: "ur-poor", label: "U Can't Afford Stuff, Ur Poor (Arby n Chief)", cat: "meme", file: "ur-poor.mp3" },
 
+  { _divider: true, label: "WEAPONS" },
+  { id: "gun-1", label: "Gun 1", cat: "weapons", file: "gun-1.mp3" },
+  { id: "gun-2", label: "Gun 2", cat: "weapons", file: "gun-2.mp3" },
+  { id: "gun-3", label: "Gun 3", cat: "weapons", file: "gun-3.mp3" },
+  { id: "gun-4", label: "Gun 4", cat: "weapons", file: "gun-4.mp3" },
+  { id: "gun-5", label: "Gun 5", cat: "weapons", file: "gun-5.mp3" },
+  { id: "gun-6", label: "Gun 6", cat: "weapons", file: "gun-6.mp3" },
+
   { _divider: true, label: "HALO" },
 
   // Halo 1

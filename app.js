@@ -36,16 +36,18 @@ const SOUNDS = [
   { id: "promotion", label: "PROMOTION!", cat: "robotnik", file: "promotion.mp3" },
 
   // Classic Memes
+  { id: "ear-rape", label: "Rick Roll", cat: "misc", file: "ear-rape.mp3" },
+  { id: "windows-xp", label: "Windows XP Error", cat: "misc", file: "windows-xp-error.mp3" },
+  { id: "mlg-horn", label: "MLG Airhorn", cat: "misc", file: "mlg-airhorn.mp3" },
+  { id: "sad-violin", label: "Sad Violin", cat: "misc", file: "sad-violin.mp3" },
+  { id: "bruh", label: "Bruh Sound Effect", cat: "misc", file: "bruh.mp3" },
+  { id: "oof", label: "Roblox OOF", cat: "misc", file: "oof.mp3" },
   { id: "imma-firin", label: "I'M A' FIRIN' MAH LAZER", cat: "meme", file: "firin-mah-lazer.mp3" },
   { id: "over-9000", label: "IT'S OVER 9000! (DBZ)", cat: "meme", file: "over-9000.mp3" },
   { id: "oh-my-god", label: "OH MY GOD (JoJo)", cat: "meme", file: "oh-my-god.mp3" },
   { id: "za-warudo", label: "ZA WARUDO! (JoJo)", cat: "meme", file: "za-warudo.mp3" },
   { id: "shiza", label: "SHIZAAA! (JoJo)", cat: "meme", file: "shiza.mp3" },
   { id: "yare-yare-daze", label: "Yare Yare Daze (JoJo)", cat: "meme", file: "yare-yare-daze.mp3" },
-  { id: "lololol", label: "LOLOLOLOLOL (Arby n Chief)", cat: "meme", file: "lololol.mp3" },
-  { id: "wipe-my-ass", label: "I Wipe My Ass With $10 (Arby n Chief)", cat: "meme", file: "wipe-my-ass.mp3" },
-  { id: "arby-laugh", label: "Master Chief Laugh (Arby n Chief)", cat: "meme", file: "arby-laugh.mp3" },
-  { id: "ur-poor", label: "U Can't Afford Stuff, Ur Poor (Arby n Chief)", cat: "meme", file: "ur-poor.mp3" },
   { id: "fuck-penus-pussy", label: "F**k F**k Penus Penus Pussy Pussy", cat: "meme", file: "fuck-penus-pussy.mp3" },
   { id: "pussy-lonely-island", label: "Pussy (Lonely Island)", cat: "meme", file: "pussy-lonely-island.mp3" },
   { id: "where-the-poop-is", label: "YouTube Is Where the Poop Is", cat: "meme", file: "where-the-poop-is.mp3" },
@@ -53,6 +55,13 @@ const SOUNDS = [
   { id: "talking-about-the-penis", label: "We're Gonna Be Talking About the Penis", cat: "meme", file: "talking-about-the-penis.mp3" },
   { id: "philips-cd-earrape", label: "Philips CD Intro Earrape", cat: "meme", file: "philips-cd-earrape.mp3" },
   { id: "dramatic-chipmunk", label: "Dramatic Chipmunk", cat: "meme", file: "dramatic-chipmunk.mp3" },
+
+  { id: "lololol", label: "LOLOLOLOLOL (Arby n Chief)", cat: "meme", file: "lololol.mp3" },
+  { id: "wipe-my-ass", label: "I Wipe My Ass With $10 (Arby n Chief)", cat: "meme", file: "wipe-my-ass.mp3" },
+  { id: "arby-laugh", label: "Master Chief Laugh (Arby n Chief)", cat: "meme", file: "arby-laugh.mp3" },
+  { id: "ur-poor", label: "U Can't Afford Stuff, Ur Poor (Arby n Chief)", cat: "meme", file: "ur-poor.mp3" },
+
+  { _divider: true, label: "HALO" },
 
   // Halo 1
   { id: "mc-death-1", label: "Master Chief Death Noise 1", cat: "halo", file: "mc-death-1.mp3" },
@@ -130,12 +139,6 @@ const SOUNDS = [
   { id: "johnson3-death-7", label: "Sgt. Johnson Death Noise 7", cat: "halo3", file: "johnson-death-7.mp3" },
 
   // Misc / Sound Effects
-  { id: "ear-rape", label: "Rick Roll", cat: "misc", file: "ear-rape.mp3" },
-  { id: "windows-xp", label: "Windows XP Error", cat: "misc", file: "windows-xp-error.mp3" },
-  { id: "mlg-horn", label: "MLG Airhorn", cat: "misc", file: "mlg-airhorn.mp3" },
-  { id: "sad-violin", label: "Sad Violin", cat: "misc", file: "sad-violin.mp3" },
-  { id: "bruh", label: "Bruh Sound Effect", cat: "misc", file: "bruh.mp3" },
-  { id: "oof", label: "Roblox OOF", cat: "misc", file: "oof.mp3" },
 ];
 
 const board = document.getElementById("board");
@@ -251,6 +254,14 @@ stopAllBtn.addEventListener("click", stopAll);
 
 function buildBoard() {
   for (const sound of SOUNDS) {
+    if (sound._divider) {
+      const divider = document.createElement("div");
+      divider.className = "section-divider";
+      divider.innerHTML = `<span>${sound.label}</span>`;
+      board.appendChild(divider);
+      continue;
+    }
+
     const btn = document.createElement("button");
     btn.className = "sound-btn";
     btn.setAttribute("data-cat", sound.cat);

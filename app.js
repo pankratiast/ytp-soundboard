@@ -38,6 +38,7 @@ const SOUNDS = [
   // Classic Memes
   { id: "gary-pokemon", label: "POKEMON (Gary)", cat: "meme", file: "gary-pokemon.mp3" },
   { id: "jjj-laugh", label: "J. Jonah Jameson Laugh", cat: "meme", file: "jjj-laugh.mp3" },
+  { id: "fuckin-dick", label: "FUCKIN DICK", cat: "meme", file: "fuckin-dick.mp3" },
   { id: "ear-rape", label: "Rick Roll", cat: "misc", file: "ear-rape.mp3" },
   { id: "windows-xp", label: "Windows XP Error", cat: "misc", file: "windows-xp-error.mp3" },
   { id: "mlg-horn", label: "MLG Airhorn", cat: "misc", file: "mlg-airhorn.mp3" },

@@ -40,6 +40,7 @@ const SOUNDS = [
   { id: "jjj-laugh", label: "J. Jonah Jameson Laugh", cat: "meme", file: "jjj-laugh.mp3" },
   { id: "fuckin-dick", label: "FUCKIN DICK", cat: "meme", file: "fuckin-dick.mp3" },
   { id: "kakayas", label: "KAKAYAS", cat: "meme", file: "kakayas.mp3" },
+  { id: "mbison-yes", label: "M. Bison YES YES!", cat: "meme", file: "mbison-yes.mp3" },
   { id: "ear-rape", label: "Rick Roll", cat: "misc", file: "ear-rape.mp3" },
   { id: "windows-xp", label: "Windows XP Error", cat: "misc", file: "windows-xp-error.mp3" },
   { id: "mlg-horn", label: "MLG Airhorn", cat: "misc", file: "mlg-airhorn.mp3" },
